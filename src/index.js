@@ -1,7 +1,4 @@
-import './styles/index.scss'
+import { render } from 'react-dom'
+import App from './components/App'
 
-const obj = {
-  msg: 'entry point',
-}
-
-console.log(obj.msg)
+render(<App />, document.getElementById('root'))
