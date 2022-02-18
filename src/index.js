@@ -1,3 +1,5 @@
+import './styles/index.scss'
+
 const obj = {
   msg: 'entry point',
 }
