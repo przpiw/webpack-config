@@ -1,4 +1,6 @@
 @use 'variables';
+@use 'hero';
+
 body {
   background-color: variables.$bg;
 }
