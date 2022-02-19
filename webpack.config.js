@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 let mode = 'development'
 let target = 'web'
@@ -11,6 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   mode: mode,
   target: target,
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'images/[hash][ext][query]',
@@ -38,6 +40,15 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            /**
+             * From the docs: When set, the given directory will be used
+             * to cache the results of the loader. Future webpack builds
+             * will attempt to read from the cache to avoid needing to run
+             * the potentially expensive Babel recompilation process on each run.
+             */
+            cacheDirectory: true,
+          },
         },
       },
     ],
@@ -48,6 +59,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    mode === 'development' && new ReactRefreshWebpackPlugin(),
   ],
 
   resolve: {
